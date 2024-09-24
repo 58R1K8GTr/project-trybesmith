@@ -27,4 +27,12 @@ describe('ProductsController', function () {
     expect(res.status).to.have.been.calledWith(201);
   });
 
+  it('testando se é possível obter os products', async function () {
+    const mockStatus = { status: 200, data: productMocksWithId };
+    sinon.stub(productsService, 'list').resolves(mockStatus);
+    await productsController.list(req, res);
+    expect(res.json).to.have.been.calledWith(productMocksWithId);
+    expect(res.status).to.have.been.calledWith(200);
+  });
+
 });

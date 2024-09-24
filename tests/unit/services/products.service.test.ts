@@ -15,4 +15,12 @@ describe('ProductsService', function () {
     expect(data).to.be.deep.equal(productMocksWithId[0]);
   });
 
+  it('testando se é possível retornar todos os products', async function () {
+    const productMock = productMocksWithId.map((product) => ProductModel.build(product));
+    sinon.stub(ProductModel, 'findAll').resolves(productMock);
+    const { status, data } = await productsService.list();
+    expect(status).to.be.equal(200);
+    expect(data).to.be.deep.equal(productMocksWithId);
+  })
+
 });
