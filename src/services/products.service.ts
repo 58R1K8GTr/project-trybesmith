@@ -9,6 +9,13 @@ async function create(
   return { status: 201, data: newProduct.dataValues };
 }
 
+async function list(): Promise<ServiceResponse<Product[]>> {
+  const products = await productsModel.findAll();
+  const productsClean = products.map((product) => product.dataValues);
+  return { status: 200, data: productsClean };
+}
+
 export default {
   create,
+  list,
 };

@@ -7,6 +7,12 @@ async function create(req: Request, res: Response) {
   res.status(status).json(data);
 }
 
+async function list(_req: Request, res: Response) {
+  const { status, data } = await productsService.list();
+  res.status(status).json(data);
+}
+
 export default {
   create,
+  list,
 };
